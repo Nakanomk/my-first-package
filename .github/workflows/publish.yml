@@ -1,0 +1,21 @@
+name: Publish with Bun ⚡️
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1 # 使用官方的 Bun 环境
+        with:
+          bun-version: latest
+
+      - name: 设置发布配置
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
+          
+      - run: bun install
+      - run: bun publish # Bun 的发布命令，快如闪电

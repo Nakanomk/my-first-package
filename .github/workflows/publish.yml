@@ -18,4 +18,5 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
           
       - run: bun install
+      - run: cat package.json
       - run: bun publish # Bun 的发布命令，快如闪电
